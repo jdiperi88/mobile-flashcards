@@ -12,7 +12,7 @@ import NewDeck from './components/NewDeck'
 
 const Tabs = createBottomTabNavigator({
   DeckList: {
-    screen: DeckList,
+    screen: NewDeck,
     navigationOptions: {
       tabBarLabel: 'DeckList',
       tabBarIcon: ({ tintColor }) => <Entypo name='archive' size={30} color={tintColor} />
@@ -52,7 +52,7 @@ const MainNavigator = createStackNavigator({
   NewDeck: {
     screen: NewDeck,
     navigationOptions: {
-      headerTintColor: white,
+      headerTintColor: blue,
       headerStyle: {
         backgroundColor: blue
       }
@@ -66,7 +66,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)} >
-        <View style={styles.container}>
+        <View style={{flex:1}}>
           <MainNavigator />
         </View>
       </Provider>
@@ -74,8 +74,3 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
