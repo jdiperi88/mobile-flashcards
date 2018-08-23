@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Platform } from 'react-native';
 import {createStore} from 'redux'
 import { Provider} from 'react-redux'
 import reducer from './reducers'
-import { purple, white } from './utils/colors'
+import { blue, white } from './utils/colors'
 import { createBottomTabNavigator,TabNavigator, createStackNavigator, DrawerNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons, Entypo } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
@@ -30,10 +30,10 @@ const Tabs = createBottomTabNavigator({
     header: null
   },
   tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? purple : white,
+    activeTintColor: Platform.OS === 'ios' ? blue : white,
     style: {
       height: 56,
-      backgroundColor: Platform.OS === 'ios' ? white : purple,
+      backgroundColor: Platform.OS === 'ios' ? white : blue,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -54,7 +54,7 @@ const MainNavigator = createStackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple
+        backgroundColor: blue
       }
     }
 
