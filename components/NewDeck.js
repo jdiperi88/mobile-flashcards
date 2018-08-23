@@ -19,9 +19,9 @@ class NewDeck extends Component {
                         <View style={styles.center}>
                             <View style ={styles.input}>
                                 <TextInput
-                                    placeholder="Type here to translate!"
+                                    placeholder="Type deck title here!"
                                     onChangeText={(title) => this.setState({title})}
-                                    style={{fontSize: 20}}
+                                    style={{fontSize: 20, textAlign: 'center'}}
                                     
                                 />
                             </View>        
