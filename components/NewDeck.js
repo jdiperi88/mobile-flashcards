@@ -1,12 +1,17 @@
 import React, {Component} from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage} from 'react-native'
 import { connect}from 'react-redux'
 import { white, blue,purple } from '../utils/colors'
-
+import { addTitle } from '../utils/api'
 
 class NewDeck extends Component {
     state ={
         title: ''
+    }
+    componentDidMount(){
+    }
+    submit = (title) =>{
+        addTitle(title)
     }
     render(){
         const {title } = this.state
@@ -30,7 +35,10 @@ class NewDeck extends Component {
                             <Text>{title}</Text>
                         </View>
                         <View>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity 
+                            style={styles.button}
+                            onPress={()=>this.submit(title)}
+                        >
                             <Text style={styles.buttonText}>Add Deck</Text>
                         </TouchableOpacity>
                         </View>
@@ -91,4 +99,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default NewDeck
+export default connect()(NewDeck)

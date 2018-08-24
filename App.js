@@ -8,11 +8,11 @@ import { createBottomTabNavigator,TabNavigator, createStackNavigator, DrawerNavi
 import { FontAwesome, Ionicons, Entypo } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
-
+import middleware from './middleware/index';
 
 const Tabs = createBottomTabNavigator({
   DeckList: {
-    screen: NewDeck,
+    screen: DeckList,
     navigationOptions: {
       tabBarLabel: 'DeckList',
       tabBarIcon: ({ tintColor }) => <Entypo name='archive' size={30} color={tintColor} />
@@ -65,7 +65,7 @@ const MainNavigator = createStackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)} >
+      <Provider store={createStore(reducer, middleware)} >
         <View style={{flex:1}}>
           <MainNavigator />
         </View>

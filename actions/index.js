@@ -1,10 +1,16 @@
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
 
-export function receiveDeck(decks){
+function receiveDecks(decks){
     return {
         type: RECEIVE_DECKS,
         decks
+    }
+}
+
+export function handleReceiveDecks(decks) {
+    return(dispatch) => {
+        dispatch(receiveDecks(decks))
     }
 }
 
