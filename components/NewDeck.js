@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage} from
 import { connect}from 'react-redux'
 import { white, blue,purple } from '../utils/colors'
 import { addTitle } from '../utils/api'
+import {handleAddDeckTitle} from '../actions'
 
 class NewDeck extends Component {
     state ={
@@ -11,7 +12,8 @@ class NewDeck extends Component {
     componentDidMount(){
     }
     submit = (title) =>{
-        addTitle(title)
+        const {dispatch} = this.props
+        dispatch(handleAddDeckTitle({title}))
     }
     render(){
         const {title } = this.state

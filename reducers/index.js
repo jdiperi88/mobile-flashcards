@@ -1,5 +1,5 @@
-import { RECEIVE_DECKS,ADD_DECK} from '../actions'
-
+import { RECEIVE_DECKS,ADD_DECK } from '../actions'
+import {FLASH_CARDS} from '../utils/api'
 function decks(state = {}, action){
     switch(action.type){
         case RECEIVE_DECKS:
@@ -9,8 +9,13 @@ function decks(state = {}, action){
             }
         case ADD_DECK:
             return {
-                ...state,
-                ...action.deck
+                [FLASH_CARDS]: {
+                    [action.deck.title]:{
+                        title: action.deck.title,
+                    },
+                    ...state[FLASH_CARDS]
+                },
+                    
             }
         default:
             return state

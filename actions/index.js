@@ -14,9 +14,15 @@ export function handleReceiveDecks(decks) {
     }
 }
 
-export function addEntry(deck){
+function addDeckTitle(deck){
     return {
         type: ADD_DECK,
         deck
+    }
+}
+
+export function handleAddDeckTitle(deck){
+    return(dispatch) =>{
+        dispatch(addDeckTitle(deck))
     }
 }
