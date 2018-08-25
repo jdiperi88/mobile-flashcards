@@ -4,19 +4,38 @@ import { connect}from 'react-redux'
 import { white, blue,purple } from '../utils/colors'
 import { addTitle } from '../utils/api'
 import {handleAddDeckTitle} from '../actions'
+import { NavigationActions } from 'react-navigation'
 
 class NewDeck extends Component {
     state ={
-        title: ''
+        title: '',
+        error: false
     }
     componentDidMount(){
+    }
+    handleTextChange(title){
+        if(title.length === 0){
+            this.setState({
+                error:true
+            })
+        }else{
+            this.setState({
+                title,
+                error:false
+            })
+        }
+        
     }
     submit = (title) =>{
         const {dispatch} = this.props
         dispatch(handleAddDeckTitle({title}))
+        this.toHome()
     }
+    toHome = () => {
+        this.props.navigation.navigate('DeckList')
+      }
     render(){
-        const {title } = this.state
+        const {title, error } = this.state
         return (
             <View styles ={styles.deckContainer}>
                     <View>
@@ -27,23 +46,26 @@ class NewDeck extends Component {
                             <View style ={styles.input}>
                                 <TextInput
                                     placeholder="Type deck title here!"
-                                    onChangeText={(title) => this.setState({title})}
+                                    onChangeText={(title) => this.handleTextChange(title)}
                                     style={{fontSize: 20, textAlign: 'center'}}
-                                    
                                 />
                             </View>        
-                        </View>             
-                        <View styles ={styles.input}>
-                            <Text>{title}</Text>
                         </View>
+                        { error &&
+                        <View style={styles.errorContainer}>
+                            <Text style={styles.error}>Please enter at least one character!</Text>
+                        </View>
+                        }
+                        { title !='' &&            
                         <View>
-                        <TouchableOpacity 
-                            style={styles.button}
-                            onPress={()=>this.submit(title)}
-                        >
-                            <Text style={styles.buttonText}>Add Deck</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity 
+                                style={styles.button}
+                                onPress={(e)=>this.submit(title)}
+                            >
+                                <Text style={styles.buttonText}>Add Deck</Text>
+                            </TouchableOpacity>
                         </View>
+                        }
                     </View>
             </View>
         )
@@ -93,11 +115,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginTop: 20,
       },
-      metricContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        backgroundColor: purple,
+      error:{
+          color: 'red',
+          textAlign: 'center',
+          fontSize: 10,
       },
+      errorContainer: {
+          
+      }
 })
 
 
