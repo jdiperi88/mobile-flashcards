@@ -9,6 +9,7 @@ import { FontAwesome, Ionicons, Entypo } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
 import middleware from './middleware/index';
+import SingleDeck from './components/SingleDeck'
 
 const Tabs = createBottomTabNavigator({
   DeckList: {
@@ -49,16 +50,15 @@ const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs,
   },
-  NewDeck: {
-    screen: NewDeck,
+  SingleDeck: {
+    screen: SingleDeck,
     navigationOptions: {
       headerTintColor: blue,
       headerStyle: {
-        backgroundColor: blue
+        backgroundColor: white
       }
     }
-
-  }
+  },
 })
 
 

@@ -2,16 +2,18 @@ import React, {Component} from 'react'
 import { View, Text, StyleSheet} from 'react-native'
 import { connect}from 'react-redux'
 import { white } from '../utils/colors'
+import Deck from './Deck';
 
-
-class Deck extends Component {
+class SingleDeck extends Component {
     render(){
-        const { title, questions } = this.props 
+        const {title,questions  } = this.props 
         return (
             <View styles ={styles.container}>
-                <View style={styles.card}>
-                    <Text style={styles.cardText}>{title}</Text>
-                    <Text style={styles.numberText}>{questions.length} Questions</Text>
+                <View>
+                    <Deck
+                        title={title}
+                        questions={questions} 
+                    />
                 </View>
             </View>
         )
@@ -38,13 +40,16 @@ const styles = StyleSheet.create({
     cardText:{
         fontSize: 40,
         textAlign: 'center'
-    },
-    numberText:{
-        fontSize: 20,
-        textAlign: 'center',
-        color: '#cccccc'
     }
 })
 
-
-export default Deck
+function mapStateToProps({FLASH_CARDS, page}){
+    const title = page
+    const questions = FLASH_CARDS[page].questions
+    return {
+        FLASH_CARDS,
+        questions,
+        title
+    }
+}
+export default connect(mapStateToProps)(SingleDeck)
