@@ -10,6 +10,7 @@ import DeckList from './components/DeckList'
 import NewDeck from './components/NewDeck'
 import middleware from './middleware/index';
 import SingleDeck from './components/SingleDeck'
+import AddCard from './components/AddCard'
 
 const Tabs = createBottomTabNavigator({
   DeckList: {
@@ -52,6 +53,15 @@ const MainNavigator = createStackNavigator({
   },
   SingleDeck: {
     screen: SingleDeck,
+    navigationOptions: {
+      headerTintColor: blue,
+      headerStyle: {
+        backgroundColor: white
+      }
+    }
+  },
+  AddCard: {
+    screen: AddCard,
     navigationOptions: {
       headerTintColor: blue,
       headerStyle: {

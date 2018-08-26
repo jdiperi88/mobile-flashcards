@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS,ADD_DECK, ADD_PAGE } from '../actions'
+import { RECEIVE_DECKS,ADD_DECK, ADD_PAGE, ADD_QUESTION } from '../actions'
 import {FLASH_CARDS} from '../utils/api'
 function decks(state = {}, action){
     switch(action.type){
@@ -17,13 +17,20 @@ function decks(state = {}, action){
                         ]
                     },
                     ...state[FLASH_CARDS]
-                },
-                    
+                },     
             }
         case ADD_PAGE:
             return {
                 ...state,
                 ...action.page
+            }
+        case ADD_QUESTION:
+             state.FLASH_CARDS[action.question.title].questions.push({question :action.question.question,answer:action.question.answer})
+            return {
+                [FLASH_CARDS]: {
+                    ...state[FLASH_CARDS]
+                },
+                page: action.question.title   
             }
         default:
             return state

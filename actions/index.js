@@ -1,6 +1,7 @@
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_PAGE = 'ADD_PAGE'
+export const ADD_QUESTION = 'ADD_QUESTION'
 
 function receiveDecks(decks){
     return {
@@ -38,5 +39,19 @@ function addPage(page){
 export function handleAddPage(page){
     return(dispatch) =>{
         dispatch(addPage(page))
+    }
+}
+
+
+function addQuestion(question){
+    return {
+        type: ADD_QUESTION,
+        question
+    }
+}
+
+export function handleAddQuestion(question){
+    return(dispatch) =>{
+        dispatch(addQuestion(question))
     }
 }
