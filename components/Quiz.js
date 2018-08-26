@@ -3,8 +3,9 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity} from 'react-native'
 import { connect}from 'react-redux'
 import { white, blue } from '../utils/colors'
 import Deck from './Deck';
+import Question from './Question';
 
-class SingleDeck extends Component {
+class Quiz extends Component {
 
     submit=()=>{
         console.log('worked')
@@ -14,21 +15,25 @@ class SingleDeck extends Component {
         return (
             <View styles ={styles.container}>
                 <View>
-                    <Deck
-                        title={title}
-                        questions={questions} 
-                    />
+                    {
+                    questions.map(question=>{
+                        <Question
+                            question={question} 
+                        />
+                    })
+
+                    }
                     <TouchableOpacity 
                         style={styles.button}
                         onPress={()=> this.props.navigation.navigate('AddCard')}
                     >
-                        <Text style={styles.buttonText}>Add Card</Text>
+                        <Text style={styles.buttonText}>Correct!</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={[styles.button,{backgroundColor:'green'}]}
-                        onPress={()=> this.props.navigation.navigate('Quiz')}
+                        onPress={()=> this.props.navigation.navigate('AddCard')}
                     >
-                        <Text style={styles.buttonText}>Start Quiz </Text>
+                        <Text style={styles.buttonText}>Incorrect!</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -84,9 +89,8 @@ function mapStateToProps({FLASH_CARDS, page}){
     const title = page
     const questions = FLASH_CARDS[page].questions
     return {
-        FLASH_CARDS,
         questions,
         title
     }
 }
-export default connect(mapStateToProps)(SingleDeck)
+export default connect(mapStateToProps)(Quiz)

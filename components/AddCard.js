@@ -44,11 +44,9 @@ class AddCard extends Component {
         const { question, answer } = this.state
         const {dispatch} = this.props
         dispatch(handleAddQuestion({title, question, answer}))
-        this.toHome()
-    }
-    toHome = () => {
         this.props.navigation.navigate('SingleDeck')
-      }
+    }
+
     render(){
         const {question,answer, error } = this.state
         return (

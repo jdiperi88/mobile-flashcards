@@ -27,9 +27,11 @@ class NewDeck extends Component {
         
     }
     submit = (title) =>{
-        const {dispatch} = this.props
-        dispatch(handleAddDeckTitle({title}))
-        this.toHome()
+        if(!this.state.error){
+            const {dispatch} = this.props
+            dispatch(handleAddDeckTitle({title}))
+            this.toHome()
+        }
     }
     toHome = () => {
         this.props.navigation.navigate('DeckList')
