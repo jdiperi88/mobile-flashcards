@@ -7,35 +7,103 @@ import Question from './Question';
 
 class Quiz extends Component {
 
+    state={
+        cardNumber: 0,
+        grade: 0,
+        cardSide: true,
+        questionNum:0,
+        revealGrade: false
+    }
+    componentDidMount(){
+        this.setState({
+            questionNum: this.props.questions.length
+        })
+    }
+    handleCardSide = ()=>{
+        this.setState({
+            cardSide:!this.state.cardSide
+        })
+    }
+    handleAnswer= (answer)=>{
+        let {cardNumber} = this.state
+        if(answer){
+            this.setState({
+                grade: this.state.grade+=1,
+                cardNumber: cardNumber+=1
+            })
+        }else{
+            this.setState({
+                cardNumber: cardNumber+=1
+            })
+        }
+    }
+    
     submit=()=>{
-        console.log('worked')
+        let {grade, questionNum} = this.state
+        this.setState({
+            grade: `${Math.floor((grade/questionNum)*100)}%`,
+            revealGrade: true
+        })
     }
     render(){
-        const {title,questions  } = this.props 
+        const {title,questions  } = this.props
+        let {cardNumber, cardSide, grade, revealGrade, questionNum} = this.state 
         return (
             <View styles ={styles.container}>
+                {
+                        cardNumber < questionNum 
+                    ?
                 <View>
-                    {
-                    questions.map(question=>{
-                        <Question
-                            question={question} 
-                        />
-                    })
-
-                    }
+                    <Question
+                        question={questions[cardNumber].question}
+                        answer={questions[cardNumber].answer}
+                        cardSide={cardSide}
+                        handleCardSide={this.handleCardSide} 
+                    />
                     <TouchableOpacity 
-                        style={styles.button}
-                        onPress={()=> this.props.navigation.navigate('AddCard')}
+                        style={[styles.button,{backgroundColor:'green'}]}
+                        onPress={()=> this.handleAnswer(true)}
                     >
                         <Text style={styles.buttonText}>Correct!</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
-                        style={[styles.button,{backgroundColor:'green'}]}
-                        onPress={()=> this.props.navigation.navigate('AddCard')}
+                        style={[styles.button,{backgroundColor:'red'}]}
+                        onPress={()=> this.handleAnswer(false)}
                     >
                         <Text style={styles.buttonText}>Incorrect!</Text>
                     </TouchableOpacity>
                 </View>
+                :
+                 revealGrade
+                 ?
+                 <View style={styles.card}>
+                    <Text style={styles.cardText}>
+                        You earned a {grade}
+                    </Text>
+                    <Text style={styles.cardText}>
+                        
+                    </Text>
+                    <TouchableOpacity 
+                        style={[styles.button,{backgroundColor:'purple'}]}
+                        onPress={()=> this.props.navigation.navigate('Deck')}
+                    >
+                        <Text style={styles.buttonText}>Back to Decks</Text>
+                    </TouchableOpacity>
+                </View>
+                 :
+                    <View style={styles.card}>
+                        <Text style={styles.cardText}>
+                            Click to see your grade! 
+                        </Text>
+                        <TouchableOpacity 
+                            style={[styles.button,{backgroundColor:'purple'}]}
+                            onPress={()=> this.submit()}
+                        >
+                            <Text style={styles.buttonText}>Grade</Text>
+                        </TouchableOpacity>
+                    </View>
+                }
+
             </View>
         )
     }

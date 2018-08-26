@@ -8,46 +8,44 @@ class Question extends Component {
         console.log('worked')
     }
     render(){
-        const {question} = this.props
+        const {question, answer, cardSide, handleCardSide} = this.props
         console.log(question)
         return (
-            <View styles ={styles.container}>
+            <View style={styles.card}>
                 <View>
-                    <View>
-                        <Text>
+                    <Text style={styles.cardHeader}>
+                        {cardSide ? 'Question:' : 'Answer:'}
+                    </Text>
+                </View>
+                <View>
+                    {
+                        cardSide
+                    ?
+                        <Text style={styles.cardText}>
                             {question}
                         </Text>
-                    </View>
-                    <TouchableOpacity 
-                        style={styles.button}
-                        onPress={()=> this.props.navigation.navigate('AddCard')}
-                    >
-                        <Text style={styles.buttonText}>Add Card</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style={[styles.button,{backgroundColor:'green'}]}
-                        onPress={()=> this.props.navigation.navigate('AddCard')}
-                    >
-                        <Text style={styles.buttonText}>Start Quiz </Text>
-                    </TouchableOpacity>
+                    :
+                        <Text style={styles.cardText}>
+                            {answer}
+                        </Text>
+                    }
                 </View>
+                <TouchableOpacity style={styles.button} onPress={()=>handleCardSide()}>
+                    <Text style={styles.buttonText}>
+                        {cardSide ? 'Answer' : 'Question'}
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'blue',
-        padding: 15,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     card:{
         backgroundColor: '#fff', 
         marginLeft: 30, 
         marginRight:30,
         marginTop: 10,
-        padding: 50,
+        padding: 30,
         shadowOpacity: 0.8,
         shadowColor: 'rgba(0, 0, 0, 0.24)',
         shadowOffset: {
@@ -55,8 +53,13 @@ const styles = StyleSheet.create({
         height: 3
         },
     },
+    cardHeader:{
+        fontSize: 30,
+        textAlign: 'center',
+        marginTop: 10
+    },
     cardText:{
-        fontSize: 40,
+        fontSize: 20,
         textAlign: 'center'
     },
     button: {
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
       },
       buttonText :{
         color: white,
-        fontSize: 20,
+        fontSize: 15,
       },
 
 })
