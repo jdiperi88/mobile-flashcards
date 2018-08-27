@@ -58,7 +58,9 @@ class Quiz extends Component {
                         question={questions[cardNumber].question}
                         answer={questions[cardNumber].answer}
                         cardSide={cardSide}
-                        handleCardSide={this.handleCardSide} 
+                        handleCardSide={this.handleCardSide}
+                        questionNum={questionNum}
+                        cardNumber={cardNumber} 
                     />
                     <TouchableOpacity 
                         style={[styles.button,{backgroundColor:'green'}]}
@@ -77,22 +79,13 @@ class Quiz extends Component {
                  revealGrade
                  ?
                  <View style={styles.card}>
-                    <Text style={styles.cardText}>
+                    <Text style={styles.resultsText}>
                         You earned a {grade}
                     </Text>
-                    <Text style={styles.cardText}>
-                        
-                    </Text>
-                    <TouchableOpacity 
-                        style={[styles.button,{backgroundColor:'purple'}]}
-                        onPress={()=> this.props.navigation.navigate('Deck')}
-                    >
-                        <Text style={styles.buttonText}>Back to Decks</Text>
-                    </TouchableOpacity>
                 </View>
                  :
                     <View style={styles.card}>
-                        <Text style={styles.cardText}>
+                        <Text style={styles.resultsText}>
                             Click to see your grade! 
                         </Text>
                         <TouchableOpacity 
@@ -131,6 +124,10 @@ const styles = StyleSheet.create({
     cardText:{
         fontSize: 40,
         textAlign: 'center'
+    },
+    resultsText:{
+        fontSize: 20,
+        textAlign:'center'
     },
     button: {
         padding: 10,

@@ -43,9 +43,11 @@ class AddCard extends Component {
         const { title} = this.props
         const { question, answer } = this.state
         const {dispatch} = this.props
-        addCard({title, question, answer})
-        dispatch(handleAddQuestion({title, question, answer}))
-        this.props.navigation.navigate('SingleDeck')
+        if(question.length != 0 && answer.length !=0){
+            addCard({title, question, answer})
+            dispatch(handleAddQuestion({title, question, answer}))
+            this.props.navigation.navigate('SingleDeck')
+        }
     }
 
     render(){
@@ -88,7 +90,7 @@ class AddCard extends Component {
                             <Text style={styles.error}>Please enter at least one character!</Text>
                         </View>
                         }
-                        { (question || answer) !='' &&            
+                        {            
                         <View>
                             <TouchableOpacity 
                                 style={styles.button}

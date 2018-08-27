@@ -8,7 +8,7 @@ class Question extends Component {
         console.log('worked')
     }
     render(){
-        const {question, answer, cardSide, handleCardSide} = this.props
+        const {question, answer, cardSide, handleCardSide, questionNum, cardNumber} = this.props
         console.log(question)
         return (
             <View style={styles.card}>
@@ -35,6 +35,11 @@ class Question extends Component {
                         {cardSide ? 'Answer' : 'Question'}
                     </Text>
                 </TouchableOpacity>
+                <View>
+                    <Text style={styles.questionText}>
+                            {`${cardNumber+1} of ${questionNum}`}
+                    </Text>
+                </View>
             </View>
         )
     }
@@ -61,6 +66,11 @@ const styles = StyleSheet.create({
     cardText:{
         fontSize: 20,
         textAlign: 'center'
+    },
+    questionText:{
+        fontSize: 20,
+        textAlign: 'right',
+        color: '#ccc'
     },
     button: {
         padding: 10,

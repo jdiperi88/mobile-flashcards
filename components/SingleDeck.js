@@ -5,7 +5,13 @@ import { white, blue } from '../utils/colors'
 import Deck from './Deck';
 
 class SingleDeck extends Component {
+    static navigationOptions = ({ navigation }) =>{
 
+        return ({
+            title: 'Deck Choice'
+            }
+        )
+    }
     submit=()=>{
         console.log('worked')
     }

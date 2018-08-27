@@ -5,6 +5,13 @@ import { white } from '../utils/colors'
 
 
 class Deck extends Component {
+    static navigationOptions = ({ navigation }) =>{
+
+        return ({
+            title: 'Decks'
+            }
+        )
+    }
     render(){
         const { title, questions } = this.props 
         return (
