@@ -4,7 +4,7 @@ import { connect}from 'react-redux'
 import { white, blue } from '../utils/colors'
 import Deck from './Deck';
 import Question from './Question';
-
+import { setLocalNotification, clearLocalNotification} from '../utils/api'
 class Quiz extends Component {
 
     state={
@@ -44,6 +44,8 @@ class Quiz extends Component {
             grade: `${Math.floor((grade/questionNum)*100)}%`,
             revealGrade: true
         })
+        clearLocalNotification()
+        .then(setLocalNotification)
     }
     render(){
         const {title,questions  } = this.props
