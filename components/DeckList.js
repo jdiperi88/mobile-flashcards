@@ -14,7 +14,9 @@ class DeckList extends Component {
         const {dispatch} = this.props
         getDecks()
             .then((data)=>{
-                const decks = {FLASH_CARDS:data}
+                console.log(data)
+                let obj = JSON.parse(data)
+                const decks = {FLASH_CARDS: obj}
                 dispatch(handleReceiveDecks(decks))
             })
     }
@@ -47,9 +49,7 @@ class DeckList extends Component {
                             onPress={()=>this.nextPage(card)}
                             key={card} 
                         >
-                            <Deck
-                                
-                                
+                            <Deck   
                                 title={card}
                                 questions={FLASH_CARDS[card].questions}
                             />

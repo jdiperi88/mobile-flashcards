@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage} from 'react-native'
 import { connect}from 'react-redux'
 import { white, blue,purple } from '../utils/colors'
-import { addTitle } from '../utils/api'
+import { addCard } from '../utils/api'
 import {handleAddDeckTitle, handleAddPage, handleAddQuestion, handleReceiveDecks} from '../actions'
 import { NavigationActions } from 'react-navigation'
 
@@ -43,6 +43,7 @@ class AddCard extends Component {
         const { title} = this.props
         const { question, answer } = this.state
         const {dispatch} = this.props
+        addCard({title, question, answer})
         dispatch(handleAddQuestion({title, question, answer}))
         this.props.navigation.navigate('SingleDeck')
     }

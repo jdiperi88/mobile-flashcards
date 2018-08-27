@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage} from 'react-native'
 import { connect}from 'react-redux'
 import { white, blue,purple } from '../utils/colors'
-import { addTitle } from '../utils/api'
+import { addDeckTitle } from '../utils/api'
 import {handleAddDeckTitle} from '../actions'
 import { NavigationActions } from 'react-navigation'
 
@@ -29,6 +29,7 @@ class NewDeck extends Component {
     submit = (title) =>{
         if(!this.state.error){
             const {dispatch} = this.props
+            addDeckTitle(title)
             dispatch(handleAddDeckTitle({title}))
             this.toHome()
         }
