@@ -2,7 +2,7 @@ export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_PAGE = 'ADD_PAGE'
 export const ADD_QUESTION = 'ADD_QUESTION'
-
+export const CLEAR_DECKS = 'CLEAR_DECKS'
 function receiveDecks(decks){
     return {
         type: RECEIVE_DECKS,
@@ -53,5 +53,17 @@ function addQuestion(question){
 export function handleAddQuestion(question){
     return(dispatch) =>{
         dispatch(addQuestion(question))
+    }
+}
+
+function clearDecks(){
+    return {
+        type: CLEAR_DECKS,
+    }
+}
+
+export function handleClearDecks(){
+    return(dispatch) =>{
+        dispatch(clearDecks())
     }
 }

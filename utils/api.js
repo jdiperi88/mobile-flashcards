@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native'
 export const FLASH_CARDS = 'FLASH_CARDS'
-
+import { Notifications, Permissions} from 'expo'
+const NOTIFICATION_KEY = 'flash_cards_notifications'
 export function addCard(question) {
     return AsyncStorage.getItem(FLASH_CARDS)
     .then(data=>{
@@ -13,6 +14,12 @@ export function addCard(question) {
     })
 }
 
+export function clearAllDecks(){
+    return AsyncStorage.setItem(FLASH_CARDS,JSON.stringify(null))
+    .then(item =>{
+        console.log(item)
+    })
+}
 export function addDeckTitle(title) {
     return AsyncStorage.getItem(FLASH_CARDS)
     .then(data=>{

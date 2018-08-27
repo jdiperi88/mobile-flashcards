@@ -15,7 +15,7 @@ class AddCard extends Component {
     componentDidMount(){
     }
     handleQuestionChange(question){
-        console.log(question, this.state)
+        console.log(question.length, this.state)
         if(question.length === 0){
             this.setState({
                 error:true
@@ -63,13 +63,13 @@ class AddCard extends Component {
                                 <TextInput
                                     placeholder="Enter question here!"
                                     onChangeText={(question) => {
-                                        this.handleQuestionChange(question
-                                    )}}
+                                        this.handleQuestionChange(question)
+                                    }}
                                     style={{fontSize: 20, textAlign: 'center'}}
                                 />
                             </View>        
                         </View>
-                        { error &&
+                        { (question.length == 0 && error) &&
                         <View style={styles.errorContainer}>
                             <Text style={styles.error}>Please enter at least one character!</Text>
                         </View>
@@ -85,7 +85,7 @@ class AddCard extends Component {
                                 />
                             </View>        
                         </View>
-                        { error &&
+                        { (question.length == 0 && error) &&
                         <View style={styles.errorContainer}>
                             <Text style={styles.error}>Please enter at least one character!</Text>
                         </View>

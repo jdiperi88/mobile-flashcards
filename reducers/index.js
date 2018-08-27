@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS,ADD_DECK, ADD_PAGE, ADD_QUESTION } from '../actions'
+import { RECEIVE_DECKS,ADD_DECK, ADD_PAGE, ADD_QUESTION, CLEAR_DECKS } from '../actions'
 import {FLASH_CARDS} from '../utils/api'
 function decks(state = {}, action){
     switch(action.type){
@@ -32,6 +32,10 @@ function decks(state = {}, action){
                 },
                 page: action.question.title   
             }
+        case CLEAR_DECKS:
+           return {
+               [FLASH_CARDS]: null
+           }
         default:
             return state
     }

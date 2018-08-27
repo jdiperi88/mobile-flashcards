@@ -2,12 +2,11 @@ import React, {Component} from 'react'
 import { View,ScrollView, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import { connect}from 'react-redux'
 import { white } from '../utils/colors'
-import { getDecks, FLASH_CARDS } from '../utils/api'
+import { getDecks, clearAllDecks } from '../utils/api'
 import { handleReceiveDecks } from '../actions'
 import {blue} from '../utils/colors'
 import Deck from './Deck';
-import { NavigationActions } from 'react-navigation'
-import { handleAddPage } from '../actions'
+import { handleAddPage,handleClearDecks } from '../actions'
 
 class DeckList extends Component {
     componentDidMount(){
@@ -26,6 +25,11 @@ class DeckList extends Component {
         const page = card
         dispatch(handleAddPage({page}))
         this.props.navigation.navigate('SingleDeck')
+    }
+    clearDeck=()=>{
+        const {dispatch} = this.props
+        clearAllDecks()
+        dispatch(handleClearDecks())
     }
 
     render(){
@@ -58,6 +62,12 @@ class DeckList extends Component {
                 }))
                     
                 }
+                <TouchableOpacity 
+                        style={[styles.button,{backgroundColor:'red'}]}
+                        onPress={()=> this.clearDeck()}
+                    >
+                        <Text style={styles.buttonText}>Clear All Decks</Text>
+                    </TouchableOpacity>
             </ScrollView>
         )
     }
