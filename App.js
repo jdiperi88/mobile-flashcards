@@ -12,6 +12,7 @@ import middleware from './middleware/index';
 import SingleDeck from './components/SingleDeck'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
+import { setLocalNotification} from './utils/api'
 const Tabs = createBottomTabNavigator({
   DeckList: {
     screen: DeckList,
@@ -82,6 +83,9 @@ const MainNavigator = createStackNavigator({
 
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer, middleware)} >
