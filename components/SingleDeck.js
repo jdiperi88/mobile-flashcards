@@ -16,9 +16,6 @@ class SingleDeck extends Component {
 			title: "Deck Choice"
 		};
 	};
-	submit = () => {
-		console.log("worked");
-	};
 	render() {
 		const { title, questions } = this.props;
 		return (

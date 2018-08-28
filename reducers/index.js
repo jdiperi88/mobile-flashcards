@@ -16,11 +16,11 @@ function decks(state = {}, action) {
 		case ADD_DECK:
 			return {
 				[FLASH_CARDS]: {
+					...state[FLASH_CARDS],
 					[action.deck.title]: {
 						title: action.deck.title,
 						questions: []
-					},
-					...state[FLASH_CARDS]
+					}
 				}
 			};
 		case ADD_PAGE:
@@ -29,15 +29,23 @@ function decks(state = {}, action) {
 				...action.page
 			};
 		case ADD_QUESTION:
-			state.FLASH_CARDS[action.question.title].questions.push({
-				question: action.question.question,
-				answer: action.question.answer
-			});
+			const { question, answer, title } = action.question;
+			let arr = [
+				...state[FLASH_CARDS][title]["questions"],
+				{ question, answer }
+			];
 			return {
 				[FLASH_CARDS]: {
-					...state[FLASH_CARDS]
+					...state[FLASH_CARDS],
+					[title]: {
+						title,
+						questions: [
+							...state[FLASH_CARDS][title]["questions"],
+							{ question, answer }
+						]
+					}
 				},
-				page: action.question.title
+				page: title
 			};
 		case CLEAR_DECKS:
 			return {

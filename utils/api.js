@@ -9,16 +9,16 @@ export function addCard(question) {
 			...obj[question.title].questions,
 			{ question: question.question, answer: question.answer }
 		];
-		return AsyncStorage.setItem(FLASH_CARDS, JSON.stringify(obj)).then(item => {
-			console.log(item);
-		});
+		return AsyncStorage.setItem(FLASH_CARDS, JSON.stringify(obj)).then(
+			item => {}
+		);
 	});
 }
 
 export function clearAllDecks() {
-	return AsyncStorage.setItem(FLASH_CARDS, JSON.stringify(null)).then(item => {
-		console.log(item);
-	});
+	return AsyncStorage.setItem(FLASH_CARDS, JSON.stringify(null)).then(
+		item => {}
+	);
 }
 export function addDeckTitle(title) {
 	return AsyncStorage.getItem(FLASH_CARDS).then(data => {
@@ -29,9 +29,9 @@ export function addDeckTitle(title) {
 				questions: []
 			}
 		};
-		return AsyncStorage.setItem(FLASH_CARDS, JSON.stringify(obj)).then(item => {
-			console.log(item);
-		});
+		return AsyncStorage.setItem(FLASH_CARDS, JSON.stringify(obj)).then(
+			item => {}
+		);
 	});
 }
 

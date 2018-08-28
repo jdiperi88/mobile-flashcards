@@ -24,9 +24,7 @@ class AddCard extends Component {
 		answer: "",
 		error: false
 	};
-	componentDidMount() {}
 	handleQuestionChange(question) {
-		console.log(question.length, this.state);
 		if (question.length === 0) {
 			this.setState({
 				error: true

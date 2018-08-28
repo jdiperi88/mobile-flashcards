@@ -30,26 +30,31 @@ class Quiz extends Component {
 		});
 	};
 	handleAnswer = answer => {
-		let { cardNumber } = this.state;
 		if (answer) {
-			this.setState({
-				grade: (this.state.grade += 1),
-				cardNumber: (cardNumber += 1)
-			});
+			this.setState(prev => ({
+				grade: (prev.grade += 1),
+				cardNumber: (prev.cardNumber += 1)
+			}));
 		} else {
-			this.setState({
-				cardNumber: (cardNumber += 1)
-			});
+			this.setState(prev => ({
+				cardNumber: (prev.cardNumber += 1)
+			}));
 		}
 	};
 
 	submit = () => {
-		let { grade, questionNum } = this.state;
-		this.setState({
-			grade: `${Math.floor((grade / questionNum) * 100)}%`,
+		this.setState(prev => ({
+			grade: `${Math.floor((prev.grade / prev.questionNum) * 100)}%`,
 			revealGrade: true
-		});
+		}));
 		clearLocalNotification().then(setLocalNotification);
+	};
+
+	playAgain = () => {
+		this.setState({
+			grade: 0,
+			cardNumber: 0
+		});
 	};
 	render() {
 		const { title, questions } = this.props;
@@ -91,6 +96,18 @@ class Quiz extends Component {
 							onPress={() => this.submit()}
 						>
 							<Text style={styles.buttonText}>Grade</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							style={[styles.button, { backgroundColor: "blue" }]}
+							onPress={() => this.playAgain()}
+						>
+							<Text style={styles.buttonText}>Try Again</Text>
+						</TouchableOpacity>
+						<TouchableOpacity
+							style={[styles.button, { backgroundColor: "green" }]}
+							onPress={() => this.props.navigation.navigate("DeckList")}
+						>
+							<Text style={styles.buttonText}>Back To Decks</Text>
 						</TouchableOpacity>
 					</View>
 				)}

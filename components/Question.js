@@ -9,9 +9,6 @@ import {
 import { white, blue } from "../utils/colors";
 
 class Question extends Component {
-	submit = () => {
-		console.log("worked");
-	};
 	render() {
 		const {
 			question,
@@ -21,7 +18,6 @@ class Question extends Component {
 			questionNum,
 			cardNumber
 		} = this.props;
-		console.log(question);
 		return (
 			<View style={styles.card}>
 				<View>

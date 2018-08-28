@@ -18,7 +18,6 @@ class DeckList extends Component {
 	componentDidMount() {
 		const { dispatch } = this.props;
 		getDecks().then(data => {
-			console.log(data);
 			let obj = JSON.parse(data);
 			const decks = { FLASH_CARDS: obj };
 			dispatch(handleReceiveDecks(decks));
